@@ -15,6 +15,7 @@ const statusBadge  = document.getElementById("statusBadge");
 const statusDot    = document.getElementById("statusDot");
 const statusText   = document.getElementById("statusText");
 const resetBtn     = document.getElementById("resetBtn");
+const manageBtn    = document.getElementById("manageBtn");
 
 // ---------------------------------------------------------------------------
 // UI update
@@ -85,6 +86,10 @@ resetBtn.addEventListener("click", async () => {
   } catch (err) {
     console.warn("Reset error:", err);
   }
+});
+
+manageBtn.addEventListener("click", () => {
+  chrome.runtime.openOptionsPage();
 });
 
 // ---------------------------------------------------------------------------

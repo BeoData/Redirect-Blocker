@@ -190,11 +190,27 @@
       color: var(--text-muted);
       border: 1px solid var(--border);
       font-weight: 500;
+      margin-bottom: 8px;
     }
 
     .btn-reset:hover {
       color: var(--text-primary);
       background: var(--bg-card-hover);
+    }
+
+    .btn-manage {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      font-weight: 500;
+      font-size: 12px;
+      padding: 9px 16px;
+    }
+
+    .btn-manage:hover {
+      color: var(--accent-mid);
+      border-color: rgba(76,201,240,0.3);
+      background: rgba(76,201,240,0.05);
     }
 
     /* ── Footer ──────────────────────────────── */
@@ -253,6 +269,10 @@
 
   <button class="btn btn-reset" id="resetBtn">
     ↻ Reset Counter
+  </button>
+
+  <button class="btn btn-manage" id="manageBtn">
+    ⚙ Manage blocked domains
   </button>
 
   <div class="footer">

@@ -13,6 +13,17 @@ let isEnabled = true;
 // Set used to prevent double-closing the same tab within the same event cycle
 const pendingClose = new Set();
 
+// User-defined domains (loaded from storage, updated live via onChanged)
+let customDomains = [];
+
+// Keep customDomains in sync whenever the options page saves a change.
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === "local" && changes.customDomains) {
+    customDomains = changes.customDomains.newValue || [];
+    console.log(`📋 Custom domains updated: ${customDomains.length} entries`);
+  }
+});
+
 // ---------------------------------------------------------------------------
 // Block-list
 // ---------------------------------------------------------------------------
@@ -101,8 +112,8 @@ function shouldBlock(url) {
   const search = parsed.search.toLowerCase();
   const urlLower = url.toLowerCase();
 
-  // Stage 1: hostname check
-  for (const domain of BLOCKED_DOMAINS) {
+  // Stage 1: hostname check (built-in list + user custom list)
+  for (const domain of [...BLOCKED_DOMAINS, ...customDomains]) {
     if (hostname === domain || hostname.endsWith("." + domain)) {
       console.log(`🚫 BLOCKED (domain) [${domain}]: ${url.substring(0, 100)}`);
       return true;
@@ -277,10 +288,12 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
 // Startup — restore persisted state
 // ---------------------------------------------------------------------------
 
-chrome.storage.local.get(["blockedCount", "isEnabled"], (result) => {
-  blockedCount = result.blockedCount ?? 0;
-  isEnabled = result.isEnabled !== false; // default: enabled
+chrome.storage.local.get(["blockedCount", "isEnabled", "customDomains"], (result) => {
+  blockedCount   = result.blockedCount ?? 0;
+  isEnabled      = result.isEnabled !== false; // default: enabled
+  customDomains  = result.customDomains || [];
   console.log(`🛡️ Redirect Blocker started`);
   console.log(`📊 Total blocked so far: ${blockedCount}`);
   console.log(`🎯 Status: ${isEnabled ? "ACTIVE" : "DISABLED"}`);
+  console.log(`📋 Custom domains loaded: ${customDomains.length}`);
 });
