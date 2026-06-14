@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Redirect Blocker",
+  "version": "1.1.0",
+  "description": "Blocks unwanted redirects, popups, ad tabs and affiliate tracking links automatically.",
+  "author": "Dejan Simic — BeoData (https://beodata.rs)",
+  "homepage_url": "https://beodata.rs",
+  "permissions": [
+    "tabs",
+    "windows",
+    "storage",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Redirect Blocker",
+    "default_icon": {
+      "16":  "icons/icon16.png",
+      "48":  "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16":  "icons/icon16.png",
+    "48":  "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

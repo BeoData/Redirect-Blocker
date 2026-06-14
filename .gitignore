@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (if build tools are ever added)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Build output (if ever applicable)
+dist/
+build/
+
+# Secrets / keys
+.env
+*.pem
+*.key
