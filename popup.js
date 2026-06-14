@@ -89,7 +89,7 @@ resetBtn.addEventListener("click", async () => {
 });
 
 manageBtn.addEventListener("click", () => {
-  chrome.runtime.openOptionsPage();
+  chrome.tabs.create({ url: chrome.runtime.getURL("options.html") });
 });
 
 // ---------------------------------------------------------------------------
