@@ -1,0 +1,15 @@
+name: Dobrodošlica novim contributorima
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/first-interaction@v1
+        with:
+          repo-token: \${{ secrets.GITHUB_TOKEN }}
+          issue-message: 'Hvala na prijavi! ⭐ Ako ti se sviđa ekstenzija, zvezdni repo da podržiš rad.'
+          pr-message: 'Hvala na PR-u! 🚀 Pregledaću ga uskoro. Svaka pomoć je dobrodošla!'

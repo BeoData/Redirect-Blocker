@@ -1,0 +1,15 @@
+name: Tweetuj novu verziju
+on:
+  release:
+    types: [published]
+jobs:
+  tweet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ethomson/send-tweet-action@v1
+        with:
+          status: "🚀 Novi Redirect Blocker v\${{ github.event.release.tag_name }} izašao! Blokira affiliate redirectove i pop-unde. Preuzmi na GitHub-u: \${{ github.event.release.html_url }} #ChromeExtension #Privacy #BeoData"
+          consumer-key: \${{ secrets.TWITTER_CONSUMER_KEY }}
+          consumer-secret: \${{ secrets.TWITTER_CONSUMER_SECRET }}
+          access-token: \${{ secrets.TWITTER_ACCESS_TOKEN }}
+          access-token-secret: \${{ secrets.TWITTER_ACCESS_SECRET }}
