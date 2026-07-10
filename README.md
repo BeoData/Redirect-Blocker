@@ -141,3 +141,4 @@ The extension does **not** read page content, collect data, or make any network 
 ## 📄 License
 
 MIT © 2025 Dejan Simic / BeoData. See [LICENSE](LICENSE) for full text.
+ 
